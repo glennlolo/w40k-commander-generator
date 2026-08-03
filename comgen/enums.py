@@ -49,6 +49,10 @@ class SuperEnum(Enum):
     def list(cls):
         return [cls[x] for x in list(cls.__members__)]
 
+    @classmethod
+    def getTitle(cls):
+        return [cls[x].title for x in list(cls.__members__)]
+
 class Race(SuperEnum):
     __keys__ = ["id", "title"]
 
