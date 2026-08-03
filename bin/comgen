@@ -1,0 +1,33 @@
+#!/usr/bin/env python3
+
+import argparse, sys
+
+from comgen import generate
+from comgen.enums import Race, Sex, Subtype
+
+sys.path.append('.')
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--race", type=Race, choices=list(Race), help="Race to generate a commander for (e.g. astra-militarum, space-marine, necrons, etc.)")
+parser.add_argument("--sex", type=Sex, choices=list(Sex), help="Sex of the commander (male or female)")
+parser.add_argument("--subtype", type=Subtype, choices=list(Subtype), help="Subtype of the commander (e.g. regiment for astra-militarum, chapter for space-marine, etc.)")
+parser.add_argument("--rank", type=str, help="Rank of the commander (e.g. general, captain, etc.)")
+parser.add_argument("--batch", type=int, help="Number of commanders to generate in batch mode")
+parser.add_argument("--export", type=str, choices=["json", "csv"], help="Export the generated commander(s) to a file (e.g. output.json)")
+parser.add_argument("--mode", type=str, choices=["full", "portrait", "names"], help="Generation mode (e.g. full, portrait, names, etc.)")
+parser.add_argument("--help", action="help", help="Show this help message and exit")
+parser.add_argument("--debug", action="store_true", help="Enable debug mode")
+args = parser.parse_args()
+
+options = {
+    "race": args.race or "astra-militarum",
+    "sex": args.sex or "",
+    "subtype": args.subtype or "",
+    "rank": args.rank or "",
+    "batch": args.batch or 1,
+    "export": args.export or "json",
+    "mode": args.mode or "full",
+    "debug": args.debug
+}
+
+gen = generate(options)
