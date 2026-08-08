@@ -1,4 +1,4 @@
-
+from comgen.comgen import ComGen
 
 def generate(options):
     """
@@ -11,6 +11,7 @@ def generate(options):
         list: Return a list of `ComGen` object containing all the commanders attributes 
     """
 
+    com_gen = ComGen(options)
 
 def exportCommanders(commanders, export_type):
     """

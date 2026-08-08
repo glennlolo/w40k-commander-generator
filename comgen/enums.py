@@ -84,3 +84,14 @@ class Subtype(SuperEnum):
     word_bearers =  (12, "Chaos Space Marines", "Word Bearers")
     iron_warriors = (13, "Chaos Space Marines", "Iron Warriors")
     thousand_sons = (14, "Chaos Space Marines", "Thousand Sons")
+
+class Rank(SuperEnum):
+    __keys__ = ["id", "races","title"]
+
+    general = (1, ["Astra Militarum"], "General")
+    captain = (2, ["Astra Militarum", "Space Marines"], "Captain")
+    colonel = (3, ["Astra Militarum"], "Colonel")
+    major = (4, ["Astra Militarum"], "Major")
+    lieutenant = (5, ["Astra Militarum", "Space Marines"], "Lieutenant")
+    commissar = (6, ["Astra Militarum"], "Commissar")
+    chaplain = (7, ["Space Marines"], "Chaplain")
