@@ -85,8 +85,12 @@ class Subtype(SuperEnum):
     iron_warriors = (13, "Chaos Space Marines", "Iron Warriors")
     thousand_sons = (14, "Chaos Space Marines", "Thousand Sons")
 
+    @classmethod
+    def getByRace(cls, race):
+        return [cls[x] for x in list(cls.__members__) if getattr(cls[x], "race") == race]
+
 class Rank(SuperEnum):
-    __keys__ = ["id", "races","title"]
+    __keys__ = ["id", "race","title"]
 
     general = (1, ["Astra Militarum"], "General")
     captain = (2, ["Astra Militarum", "Space Marines"], "Captain")
@@ -95,3 +99,7 @@ class Rank(SuperEnum):
     lieutenant = (5, ["Astra Militarum", "Space Marines"], "Lieutenant")
     commissar = (6, ["Astra Militarum"], "Commissar")
     chaplain = (7, ["Space Marines"], "Chaplain")
+
+    @classmethod
+    def getByRace(cls, race):
+        return [cls[x] for x in list(cls.__members__) if race in getattr(cls[x], "race")]
