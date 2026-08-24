@@ -1,4 +1,8 @@
+import logging
+
 from comgen.comgen import ComGen
+
+logger = logging.getLogger(__name__)
 
 def generate(options):
     """
@@ -10,6 +14,11 @@ def generate(options):
     Returns:
         list: Return a list of `ComGen` object containing all the commanders attributes 
     """
+
+    if options["debug"]:
+        logging.basicConfig(level=logging.DEBUG)
+    else:
+        logging.basicConfig(format='%(message)s', level=logging.INFO)
 
     com_gen = ComGen(options)
 

@@ -1,4 +1,6 @@
+import logging
 from unittest import TestCase
+from unittest.mock import patch
 
 from comgen.comgen import ComGen
 from comgen.enums import Race, Rank, Sex, Subtype
@@ -52,3 +54,26 @@ class TestGetCommanderParams(TestCase):
 
         with self.assertRaises(AssertionError):
             ComGen(self.options)
+
+    def testBatchGeneration(self):
+        self.options["batch"] = 5
+        comgen = ComGen(self.options)
+        params = comgen.getCommandersParams(self.options)
+        # Check batch size and types
+        self.assertIsInstance(params, list)
+        self.assertEqual(len(params), 5)
+        # Check parameter values
+        self.assertTrue(all(isinstance(param, dict) for param in params))
+        self.assertTrue(all(param["race"].title == self.options["race"] for param in params))
+        self.assertTrue(all(param["subtype"].race == param["race"].title for param in params))
+        self.assertTrue(all(param["race"].title in param["rank"].race for param in params))
+
+    def testDebugLogging(self):
+        self.options["debug"] = True
+        # Check if debug messages are logged
+        logger = logging.getLogger('comgen.comgen')
+        with patch.object(logger, 'info') as mock_info, patch.object(logger, 'debug') as mock_debug:
+            comgen = ComGen(self.options)
+            params = comgen.getCommandersParams(self.options)
+            mock_info.assert_called_with("Generating 1 commanders with the following options: %s", self.options)
+            mock_debug.assert_called_with("Commander #0 generated options: %s", params[0])

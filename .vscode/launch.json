@@ -6,6 +6,14 @@
     "configurations": [
 
         {
+            "name": "Debug ComGen Full",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/comgen",
+            "console": "integratedTerminal",
+            "args": "--race 'Astra Militarum' --debug"
+        },
+        {
             "name": "Debug ComGen",
             "type": "debugpy",
             "request": "launch",

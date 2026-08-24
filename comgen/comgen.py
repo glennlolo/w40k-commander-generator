@@ -1,6 +1,9 @@
 import random
+import logging
+import pprint
 from comgen.enums import Race, Rank, Sex, Subtype
 
+logger = logging.getLogger(__name__)
 
 class ComGen:
     """
@@ -40,6 +43,8 @@ class ComGen:
             params (list): A List of collections of parameters for each commander to generate
         """
 
+        logger.info(f"Generating {options['batch']} commanders with the following options: \n{pprint.pformat(options)}")
+
         #If their is unset options, randomize them for each commander
         params = []
         param = {
@@ -66,6 +71,8 @@ class ComGen:
                 #Check parameter compatibility
                 assert options['race'] in param["rank"].race, f"Invalid rank: {options['rank']} for {options['race']}"
 
+            logger.debug(f"Commander #{i} generated options: \n{pprint.pformat(param)}")
+            
             params.append(param.copy())
 
         return params
