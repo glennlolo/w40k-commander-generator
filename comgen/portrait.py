@@ -1,4 +1,4 @@
-
+DATABASE_PATH = "../data"
 
 class Portrait:
     def __init__(self, params):
@@ -6,5 +6,5 @@ class Portrait:
         Initializes the Portrait class to generate a commander's portrait
         on a database of images.
         """
-
+        
     

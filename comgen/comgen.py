@@ -5,6 +5,13 @@ from comgen.enums import Race, Rank, Sex, Subtype
 
 logger = logging.getLogger(__name__)
 
+defaultParams = {
+    "race": Race.astra.title,
+    "sex": Sex.male.title,
+    "subtype": Subtype.cadian.title,
+    "rank": Rank.lieutenant.title,
+}
+
 class ComGen:
     """
     A class to generate a commanders portraits and names.
